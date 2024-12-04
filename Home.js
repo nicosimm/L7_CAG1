@@ -28,10 +28,16 @@ const Home = () => {
 
     // Show task summary
     const showSummary = () => {
-        const { completed, percentageCompleted } = calculateSummary(tasks);
+        const totalTasks = tasks.length;
+        const completedTasks = tasks.filter(task => task.completed).length;
+        const incompleteTasks = totalTasks - completedTasks;
+        const percentageCompleted = totalTasks > 0 ? (completedTasks / totalTasks) * 100 : 0;
+
         Alert.alert(
             'Task Summary',
-            `Completed: ${completed}, Percentage: ${percentageCompleted.toFixed(2)}%`
+            `Completed Tasks: ${completedTasks}\n` +
+            `Incomplete Tasks: ${incompleteTasks}\n` +
+            `Percentage Completed: ${percentageCompleted.toFixed(2)}%`
         );
     };
 

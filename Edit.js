@@ -7,6 +7,18 @@ const Edit = ({ route, navigation }) => {
     const [description, setDescription] = useState(item.description);
     const [completed, setCompleted] = useState(item.completed);
 
+    const handleEdit = () => {
+        if (description.trim()) {
+            const updatedTasks = tasks.map((task) =>
+                task.id === currentTask.id ? { ...task, description } : task
+            );
+            setTasks(updatedTasks);
+            navigation.goBack();
+        } else {
+            Alert.alert('Error', 'Task description cannot be empty.');
+        }
+    };
+
     const saveTask = () => {
         setTasks(prevTasks =>
             prevTasks.map(task =>
